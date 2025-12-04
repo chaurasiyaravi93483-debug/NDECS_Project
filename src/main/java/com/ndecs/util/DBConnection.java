@@ -5,17 +5,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/ndecs_db?useSSL=false&serverTimezone=UTC";
-    private static final String USER = "root";
-    private static final String PASSWORD = "Ravi@2611"; // CHANGE THIS
+
+    private static final String URL =
+        "jdbc:postgresql://dpg-d4osll75r7bs73d702a0-a.oregon-postgres.render.com:5432/ndecs_db?sslmode=require";
+    private static final String USER = "ndecs_db_user";
+    private static final String PASSWORD = "fWQHFTGGGvW1FqrtbPPq4gSEUhdQfWY0"; // <-- Only password here
 
     static {
-        try { Class.forName("com.mysql.cj.jdbc.Driver"); }
-        catch (ClassNotFoundException e) { e.printStackTrace(); }
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
-
